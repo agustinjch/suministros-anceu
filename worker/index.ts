@@ -59,6 +59,11 @@ async function handleSend(request: Request, env: Env): Promise<Response> {
     return Response.json({ error: 'could not send email' }, { status: 502 })
   }
 
+  // El id de Resend al log: es lo único con lo que rastrear después un envío
+  // concreto ("¿se mandó el inventario del martes?") en el panel de Resend.
+  const sent = (await res.json().catch(() => null)) as { id?: string } | null
+  console.log(`Resend ok id=${sent?.id ?? 'unknown'} toBuy=${subject}`)
+
   return Response.json({ ok: true })
 }
 

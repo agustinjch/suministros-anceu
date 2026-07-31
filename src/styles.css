@@ -1,0 +1,217 @@
+:root {
+  --bg: #faf9f7;
+  --fg: #1c1a17;
+  --muted: #6b655c;
+  --line: #e0dcd5;
+  --accent: #2f6f4f;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.app {
+  max-width: 30rem;
+  margin: 0 auto;
+  padding: 1rem 1rem 4rem;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0 1rem;
+}
+
+.lang {
+  text-align: right;
+}
+
+.lang button {
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  padding: 0.25rem 0.4rem;
+  cursor: pointer;
+}
+
+.lang button[aria-pressed='true'] {
+  color: var(--fg);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.zone {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.25rem;
+}
+
+.progress {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.card img {
+  width: 100%;
+  max-width: 11rem;
+  height: 11rem;
+  object-fit: contain;
+  margin: 0 auto 0.5rem;
+  display: block;
+}
+
+.card h2 {
+  font-size: 1.35rem;
+  margin: 0 0 0.15rem;
+}
+
+.froiz-name {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0 0 0.75rem;
+}
+
+.target {
+  font-size: 1rem;
+  color: var(--muted);
+  margin: 0 0 0.75rem;
+}
+
+.card input[type='number'] {
+  width: 100%;
+  font-size: 2.5rem;
+  text-align: center;
+  padding: 0.5rem;
+  border: 2px solid var(--line);
+  border-radius: 0.5rem;
+  background: #fff;
+  color: var(--fg);
+}
+
+.card input[type='number']:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+button.primary,
+button.secondary,
+button.ghost {
+  flex: 1;
+  font-size: 1.05rem;
+  padding: 0.85rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--line);
+  cursor: pointer;
+}
+
+button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+button.secondary {
+  background: #fff;
+  color: var(--fg);
+}
+
+button.ghost {
+  background: none;
+  border-color: transparent;
+  color: var(--muted);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+label {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+label span {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+}
+
+label input[type='text'] {
+  width: 100%;
+  font-size: 1.1rem;
+  padding: 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 0.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+td {
+  padding: 0.5rem 0.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+td.num {
+  text-align: right;
+  white-space: nowrap;
+}
+
+td.skipped {
+  color: var(--muted);
+  font-style: italic;
+}
+
+tr.short td.num {
+  color: #a3341f;
+  font-weight: 600;
+}
+
+td button.ghost {
+  padding: 0.35rem 0.5rem;
+  font-size: 0.9rem;
+}
+
+.error {
+  background: #fdecea;
+  border: 1px solid #f5c2bb;
+  color: #8a2114;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
