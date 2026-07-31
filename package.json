@@ -9,7 +9,8 @@
     "deploy": "vite build && wrangler deploy",
     "test": "vitest run",
     "test:watch": "vitest",
-    "catalog": "tsx scripts/build-catalog.ts"
+    "catalog": "tsx scripts/build-catalog.ts",
+    "add": "tsx scripts/add-product.ts"
   },
   "dependencies": {
     "react": "^19.2.8",
