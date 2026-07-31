@@ -3164,6 +3164,22 @@ git commit -m "docs: README con desarrollo, mantenimiento del catalogo y desplie
 
 ---
 
+## Desviaciones durante la ejecución
+
+Lo que el plan no previó y hubo que cambiar. Tasks 1–10 completadas, 89 tests en
+verde, correo real entregado. Task 11 (despliegue) pendiente de `wrangler login`.
+
+| # | Problema | Solución |
+|---|---|---|
+| 1 | **Vitest no arrancaba.** `vite.config.ts` carga el plugin `cloudflare()`, que exige que exista el Worker; cualquier test fallaba con un error de arranque del plugin en vez de con el fallo que se probaba. | `vitest.config.ts` propio, sin el plugin. Los tests invocan `worker.fetch()` como función normal y no necesitan workerd. |
+| 2 | **`tsc` no compilaba los scripts.** El `tsconfig` fijaba `types: ["vite/client"]`, lo que oculta `@types/node` aunque esté instalado, y `scripts/` usa `node:fs` y `process`. | `npm i -D @types/node` y `types: ["vite/client", "node"]`. |
+| 3 | **Faltaba `wrangler types`.** Sin `worker-configuration.d.ts` no existen `ExportedHandler` ni `ExecutionContext`. | Paso propio en la Task 1. Ya estaba corregido en la auto-revisión del plan. |
+| 4 | **Dos productos del sheet estaban descatalogados (404 en la API).** `55588` (Bref WC duplo eucalipto) y `52790` (Orégano Ducros 54 g). | Recambios: `45271` (Bref WC duplo natura 2x50 g, mismo formato) y `23977` (Orégano Froiz hoja 8 g). **El orégano es provisional:** 8 g frente a 54 g es mucho menos, y el objetivo de 2 ud quizá deba subir. |
+| 5 | **`build-catalog` moría en el primer fallo,** así que las roturas se descubrían de una en una. | Recorre los 46, acumula los fallos y los lista todos al final. Si hay alguno no escribe `products.json`: un catálogo corto en silencio es peor que ninguno. |
+| 6 | **Vaciar el input marcaba el producto como saltado.** El plan usaba `null` para "campo vacío" y para "saltado", confundiendo "he borrado lo que escribí" con "no lo he mirado". | Tres estados, tres representaciones: `number` contado, `null` saltado (sólo el botón Saltar), clave ausente sin tocar. |
+| 7 | **`FULL INVENTORY` dejaba espacios sobrantes** al final de las filas sin `OK`, por el relleno del padding. | `trimEnd()` por línea, con un test que lo comprueba en todo el cuerpo. |
+| 8 | Mejora no prevista: el Worker descartaba la respuesta de Resend. | Registra el `id` de Resend en el log, que es lo único con lo que rastrear después un envío concreto en su panel. |
+
 ## Notas para quien revise
 
 **Una desviación deliberada respecto al spec.** El spec describía derivar `unit` con un
