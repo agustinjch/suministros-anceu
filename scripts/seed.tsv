@@ -16,7 +16,7 @@ id	zone	target	unit	name	name_en
 22699	limpieza	4	ud	Ambientador spray	Air freshener spray
 23085	limpieza	4	ud	Ambientador de palos	Reed diffuser
 38910	limpieza	4	ud	Fregasuelos	Floor cleaner
-55588	limpieza	4	ud	Bolas para limpieza de wáter	Toilet rim blocks
+45271	limpieza	4	ud	Bolas para limpieza de wáter	Toilet rim blocks
 2283	limpieza	3	ud	Desengrasante Zorka	Degreaser (Zorka)
 4976	limpieza	5	ud	Lejía con detergente	Bleach with detergent
 15086	limpieza	3	ud	Desatascador de tuberías líquido	Liquid drain unblocker
@@ -27,7 +27,7 @@ id	zone	target	unit	name	name_en
 68507	comida	3	ud	Helado sándwich tipo Oreo	Ice cream sandwiches (cookies and cream)
 5014	comida	2	ud	Sal gruesa	Coarse salt
 5034	comida	1	ud	Sal fina	Fine iodised salt
-52790	comida	2	ud	Orégano	Oregano
+23977	comida	2	ud	Orégano	Oregano
 4598	comida	2	ud	Mantequilla	Butter
 46677	comida	2	ud	Azúcar	White sugar
 58871	comida	4	ud	Mermelada de fresa	Strawberry jam
