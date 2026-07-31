@@ -1,0 +1,47 @@
+id	zone	target	unit	name	name_en
+2565	cocina	3	ud	Papel higiénico	Toilet paper
+23293	cocina	7	ud	Papel de horno	Oven paper
+23646	cocina	6	ud	Papel de aluminio	Aluminium foil
+5406	cocina	4	ud	Película de plástico	Cling film
+38762	cocina	7	ud	Papel de cocina	Kitchen paper
+2527	cocina	6	ud	Servilletas	Napkins
+57172	cocina	5	ud	Bolsas de basura 100 L	Bin bags 100 L
+45113	cocina	4	ud	Bolsas de basura 30 L	Bin bags 30 L
+79223	cocina	4	ud	Bayetas	Cleaning cloths
+27895	cocina	4	ud	Estropajos	Scouring pads
+21716	cocina	4	ud	Nanita	Cleaning pad (delicate surfaces)
+56093	limpieza	4	ud	Detergente Marsella	Marsella detergent
+48857	limpieza	4	ud	Suavizante Vernel Maldivas	Fabric softener (Vernel Maldivas)
+20124	limpieza	5	ud	Insecticida	Insecticide
+22699	limpieza	4	ud	Ambientador spray	Air freshener spray
+23085	limpieza	4	ud	Ambientador de palos	Reed diffuser
+38910	limpieza	4	ud	Fregasuelos	Floor cleaner
+55588	limpieza	4	ud	Bolas para limpieza de wáter	Toilet rim blocks
+2283	limpieza	3	ud	Desengrasante Zorka	Degreaser (Zorka)
+4976	limpieza	5	ud	Lejía con detergente	Bleach with detergent
+15086	limpieza	3	ud	Desatascador de tuberías líquido	Liquid drain unblocker
+40240	limpieza	2	ud	Oxígeno activo	Oxygen stain remover
+51629	limpieza	2	ud	Blanqueador percarbonato	Percarbonate whitener
+45365	comida	3	ud	Helados mini twins	Mini ice cream sandwiches (twins)
+45372	comida	3	ud	Helado sándwich de nata	Ice cream sandwiches (cream)
+68507	comida	3	ud	Helado sándwich tipo Oreo	Ice cream sandwiches (cookies and cream)
+5014	comida	2	ud	Sal gruesa	Coarse salt
+5034	comida	1	ud	Sal fina	Fine iodised salt
+52790	comida	2	ud	Orégano	Oregano
+4598	comida	2	ud	Mantequilla	Butter
+46677	comida	2	ud	Azúcar	White sugar
+58871	comida	4	ud	Mermelada de fresa	Strawberry jam
+7292	bebidas	5	pack	Shandy (pack de 6)	Shandy, lemon (6-pack)
+9753	bebidas	5	pack	Coca-Cola (pack de 12 latas)	Coca-Cola (12-can pack)
+9106	bebidas	2	pack	Coca-Cola Zero (pack de 12 latas)	Coca-Cola Zero (12-can pack)
+7670	bebidas	6	pack	Estrella Galicia (pack de 12 botellas)	Estrella Galicia (12-bottle pack)
+37283	bebidas	2	pack	Estrella Galicia 0,0 (pack de 6 botellas)	Alcohol-free beer 0.0 (6-bottle pack)
+51190	cafeteria	12	ud	Bebida de avena	Oat drink
+10360	cafeteria	5	ud	Café en grano natural	Coffee beans
+41183	cafeteria	4	ud	Café molido descafeinado	Decaf ground coffee
+50152	cafeteria	2	ud	Té rojo	Red tea
+50154	cafeteria	2	ud	Té verde	Green tea
+1827	cafeteria	2	ud	Manzanilla	Chamomile
+1924	cafeteria	2	ud	Menta poleo	Peppermint tea
+44312	cafeteria	5	bolsa	Hielo	Ice
+15592	cafeteria	12	ud	Leche semidesnatada sin lactosa	Lactose-free semi-skimmed milk
