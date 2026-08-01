@@ -15,7 +15,6 @@ export interface Strings {
   start: string
   resume: string
   startOver: string
-  shouldBe: string
   howMany: string
   skip: string
   back: string
@@ -47,7 +46,6 @@ const ES: Strings = {
   start: 'Empezar',
   resume: 'Continuar donde lo dejaste',
   startOver: 'Empezar de cero',
-  shouldBe: 'Debería haber',
   howMany: '¿Cuántos hay?',
   skip: 'Saltar',
   back: 'Atrás',
@@ -79,7 +77,6 @@ const EN: Strings = {
   start: 'Start',
   resume: 'Resume where you left off',
   startOver: 'Start over',
-  shouldBe: 'Should be',
   howMany: 'How many are there?',
   skip: 'Skip',
   back: 'Back',

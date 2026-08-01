@@ -94,10 +94,20 @@ h1 {
   margin: 0 0 0.75rem;
 }
 
-.target {
-  font-size: 1rem;
+.amount {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.amount input {
+  flex: 1;
+}
+
+.unit {
+  font-size: 1.1rem;
   color: var(--muted);
-  margin: 0 0 0.75rem;
+  white-space: nowrap;
 }
 
 .card input[type='number'] {
@@ -195,11 +205,6 @@ td.num {
 td.skipped {
   color: var(--muted);
   font-style: italic;
-}
-
-tr.short td.num {
-  color: #a3341f;
-  font-weight: 600;
 }
 
 td button.ghost {

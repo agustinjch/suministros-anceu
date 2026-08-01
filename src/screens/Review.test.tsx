@@ -96,7 +96,7 @@ describe('Review', () => {
     expect(onEdit).toHaveBeenCalledWith(1)
   })
 
-  it('marca en rojo solo las filas por debajo del objetivo', () => {
+  it('no revela el objetivo ni por numero ni por resaltado', () => {
     const { container } = render(
       <Review
         lang="es"
@@ -109,7 +109,12 @@ describe('Review', () => {
         onBack={noop}
       />,
     )
-    // Papel de cocina: 4 de 7 -> corto. Estropajos: 4 de 4 -> no.
-    expect(container.querySelectorAll('tr.short')).toHaveLength(1)
+    // Papel de cocina tiene objetivo 7 y hay 4. Ni el 7 ni "/ 7" ni una clase
+    // que distinga las filas cortas: de cualquiera de las tres se deduce el
+    // objetivo.
+    const text = container.textContent ?? ''
+    expect(text).not.toContain('7')
+    expect(text).not.toContain('/')
+    expect(container.querySelectorAll('tr.short')).toHaveLength(0)
   })
 })

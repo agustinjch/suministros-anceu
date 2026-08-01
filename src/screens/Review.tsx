@@ -14,6 +14,11 @@ interface Props {
   onBack: () => void
 }
 
+/**
+ * Igual que la card: nada de objetivos. Se quitó también el resaltado en rojo
+ * de las filas cortas, porque aunque no diga el número revela que se está por
+ * debajo, y de ahí se deduce el objetivo.
+ */
 export function Review({
   lang,
   products,
@@ -38,14 +43,12 @@ export function Review({
           {products.map((product, index) => {
             const value = amounts[product.id]
             const counted = typeof value === 'number'
-            const short = counted && value < product.target
             return (
-              <tr key={product.id} className={short ? 'short' : undefined}>
+              <tr key={product.id}>
                 <td>{productName(product, lang)}</td>
                 <td className={counted ? 'num' : 'num skipped'}>
                   {counted ? value : s.notCountedLabel}
                 </td>
-                <td className="num">/ {product.target}</td>
                 <td className="num">
                   <button type="button" className="ghost" onClick={() => onEdit(index)}>
                     {s.edit}
