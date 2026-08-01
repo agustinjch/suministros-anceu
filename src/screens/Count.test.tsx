@@ -35,6 +35,7 @@ interface Overrides {
   onSkip?: (id: number) => void
   onBack?: () => void
   onNext?: () => void
+  onLangChange?: (lang: 'es' | 'en') => void
 }
 
 function renderCount(overrides: Overrides = {}) {
@@ -45,10 +46,12 @@ function renderCount(overrides: Overrides = {}) {
     onSkip = noop,
     onBack = noop,
     onNext = noop,
+    onLangChange = noop,
   } = overrides
   return render(
     <Count
       lang="es"
+      onLangChange={onLangChange}
       products={products}
       index={index}
       amounts={amounts}
@@ -129,6 +132,27 @@ describe('Count', () => {
 
     const last = renderCount({ index: 2, amounts: { 3: 1 } })
     expect(input(last.container).getAttribute('enterkeyhint')).toBe('done')
+  })
+
+  describe('idioma en el topbar', () => {
+    it('el toggle va en la misma fila que la zona y el progreso', () => {
+      const { container } = renderCount({ index: 0 })
+      const topbar = container.querySelector('.topbar')
+
+      // Las tres cosas en una sola fila: es lo que ahorra el alto que falta con
+      // el teclado abierto.
+      expect(topbar?.querySelector('.zone')?.textContent).toBe('Cocina')
+      expect(topbar?.querySelector('.progress')?.textContent).toContain('1 de 3')
+      expect(topbar?.querySelector('.lang')).not.toBeNull()
+    })
+
+    it('cambiar de idioma avisa al padre', () => {
+      const onLangChange = vi.fn()
+      renderCount({ index: 0, onLangChange })
+
+      screen.getByRole('button', { name: 'EN' }).click()
+      expect(onLangChange).toHaveBeenCalledWith('en')
+    })
   })
 
   describe('los botones no cierran el teclado del movil', () => {

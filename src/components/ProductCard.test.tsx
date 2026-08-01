@@ -90,15 +90,15 @@ describe('ProductCard', () => {
     expect(screen.getByText('packs')).toBeDefined()
   })
 
-  it('muestra el nombre y el nombre canonico de Froiz', () => {
-    renderCard({ product: shandy, lang: 'es', value: undefined })
-    expect(screen.getByText('Shandy (pack de 6)')).toBeDefined()
-    expect(screen.getByText('Cerveza Cruzcampo Shandy limón pack 6x25 cl')).toBeDefined()
+  it('muestra el nombre del producto', () => {
+    const { container } = renderCard({ product: shandy, lang: 'es', value: undefined })
+    // El titulo lleva la (i) dentro, asi que se busca en el h2 y no por texto exacto.
+    expect(container.querySelector('h2')?.textContent).toContain('Shandy (pack de 6)')
   })
 
   it('traduce el nombre y la unidad al ingles', () => {
-    renderCard({ product: shandy, lang: 'en', value: undefined })
-    expect(screen.getByText('Shandy, lemon (6-pack)')).toBeDefined()
+    const { container } = renderCard({ product: shandy, lang: 'en', value: undefined })
+    expect(container.querySelector('h2')?.textContent).toContain('Shandy, lemon (6-pack)')
     expect(screen.getByText('packs')).toBeDefined()
   })
 
@@ -113,6 +113,59 @@ describe('ProductCard', () => {
     const input = container.querySelector('input')
     expect(input?.getAttribute('inputmode')).toBe('numeric')
     expect(input?.value).toBe('2')
+  })
+
+  describe('descripcion plegable', () => {
+    it('la descripcion no sale por defecto: con titulo y foto suele bastar', () => {
+      renderCard({ product: shandy })
+      expect(screen.queryByText('Cerveza Cruzcampo Shandy limón pack 6x25 cl')).toBeNull()
+    })
+
+    it('la (i) la despliega y la vuelve a plegar', () => {
+      renderCard({ product: shandy })
+      const info = screen.getByRole('button', { name: 'Ver descripción' })
+
+      fireEvent.click(info)
+      expect(screen.getByText('Cerveza Cruzcampo Shandy limón pack 6x25 cl')).toBeDefined()
+      expect(info.getAttribute('aria-expanded')).toBe('true')
+
+      fireEvent.click(info)
+      expect(screen.queryByText('Cerveza Cruzcampo Shandy limón pack 6x25 cl')).toBeNull()
+      expect(info.getAttribute('aria-expanded')).toBe('false')
+    })
+
+    it('vuelve a plegarse al cambiar de producto', () => {
+      const { rerender } = render(
+        <ProductCard
+          product={shandy}
+          lang="es"
+          value={1}
+          onChange={noop}
+          onEnter={noop}
+          enterKeyHint="next"
+        />,
+      )
+      fireEvent.click(screen.getByRole('button', { name: 'Ver descripción' }))
+      expect(screen.getByText('Cerveza Cruzcampo Shandy limón pack 6x25 cl')).toBeDefined()
+
+      rerender(
+        <ProductCard
+          product={lejia}
+          lang="es"
+          value={undefined}
+          onChange={noop}
+          onEnter={noop}
+          enterKeyHint="next"
+        />,
+      )
+      expect(screen.queryByText('Lejía Froiz con detergente')).toBeNull()
+    })
+
+    it('la (i) tampoco roba el foco al input', () => {
+      renderCard({ product: shandy })
+      const info = screen.getByRole('button', { name: 'Ver descripción' })
+      expect(fireEvent.mouseDown(info)).toBe(false)
+    })
   })
 
   describe('foco', () => {

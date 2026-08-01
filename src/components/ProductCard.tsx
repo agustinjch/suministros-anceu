@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { productName, t, unitLabel, type Lang } from '../lib/i18n'
 import type { Product } from '../lib/types'
 
@@ -35,6 +35,7 @@ export function ProductCard({
   const s = t(lang)
   const unit = unitLabel(product.unit, lang)
   const inputRef = useRef<HTMLInputElement>(null)
+  const [showDescription, setShowDescription] = useState(false)
 
   /**
    * Al pasar de producto React NO remonta esta card: reutiliza el mismo nodo
@@ -56,11 +57,34 @@ export function ProductCard({
     input.select()
   }, [product.id])
 
+  // La descripción vuelve a plegarse al cambiar de producto: el estado compacto
+  // es el que debe salir por defecto en cada card.
+  useEffect(() => {
+    setShowDescription(false)
+  }, [product.id])
+
   return (
     <div className="card">
       <img src={product.image} alt="" />
-      <h2>{productName(product, lang)}</h2>
-      <p className="froiz-name">{product.froiz_name}</p>
+      {/*
+        La (i) va en línea con el título, no en su propia fila: una fila extra
+        costaría casi todo el alto que se gana plegando la descripción, que es el
+        motivo de plegarla.
+      */}
+      <h2>
+        {productName(product, lang)}{' '}
+        <button
+          type="button"
+          className="info"
+          aria-label={s.showDescription}
+          aria-expanded={showDescription}
+          onMouseDown={(event) => event.preventDefault()}
+          onClick={() => setShowDescription((shown) => !shown)}
+        >
+          i
+        </button>
+      </h2>
+      {showDescription && <p className="froiz-name">{product.froiz_name}</p>}
       <label>
         <span>{s.howMany}</span>
         <div className="amount">

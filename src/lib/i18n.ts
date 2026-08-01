@@ -22,6 +22,7 @@ export interface Strings {
   review: string
   reviewTitle: string
   notCountedLabel: string
+  showDescription: string
   edit: string
   send: string
   sending: string
@@ -53,6 +54,7 @@ const ES: Strings = {
   review: 'Revisar',
   reviewTitle: 'Revisa antes de enviar',
   notCountedLabel: 'sin contar',
+  showDescription: 'Ver descripción',
   edit: 'Cambiar',
   send: 'Enviar',
   sending: 'Enviando…',
@@ -84,6 +86,7 @@ const EN: Strings = {
   review: 'Review',
   reviewTitle: 'Check before sending',
   notCountedLabel: 'not counted',
+  showDescription: 'Show description',
   edit: 'Change',
   send: 'Send',
   sending: 'Sending…',

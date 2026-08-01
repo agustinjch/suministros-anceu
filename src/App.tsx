@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { LangToggle } from './components/LangToggle'
 import { loadLang, saveLang, type Lang } from './lib/i18n'
 import { clearSession, loadSession, saveSession, sortByZone, toCountEntries } from './lib/storage'
 import productsJson from './products.json'
@@ -88,14 +89,12 @@ export function App() {
 
   return (
     <main className="app">
-      <div className="lang">
-        <button type="button" aria-pressed={lang === 'es'} onClick={() => setLang('es')}>
-          ES
-        </button>
-        <button type="button" aria-pressed={lang === 'en'} onClick={() => setLang('en')}>
-          EN
-        </button>
-      </div>
+      {/*
+        En la pantalla de conteo el toggle va dentro del topbar de Count, junto a
+        la zona y el progreso, para no gastar una fila entera de alto: con el
+        teclado abierto el alto es justo lo que falta.
+      */}
+      {screen !== 'count' && <LangToggle lang={lang} onChange={setLang} />}
 
       {screen === 'start' && (
         <Start
@@ -121,6 +120,7 @@ export function App() {
       {screen === 'count' && (
         <Count
           lang={lang}
+          onLangChange={setLang}
           products={products}
           index={index}
           amounts={session.amounts}

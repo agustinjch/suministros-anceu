@@ -1,3 +1,4 @@
+import { LangToggle } from '../components/LangToggle'
 import { ProductCard } from '../components/ProductCard'
 import { t, type Lang, type Strings } from '../lib/i18n'
 import type { Product, Zone } from '../lib/types'
@@ -27,6 +28,7 @@ function keepFocusInInput(event: React.MouseEvent<HTMLButtonElement>): void {
 
 interface Props {
   lang: Lang
+  onLangChange: (lang: Lang) => void
   products: Product[]
   index: number
   amounts: Record<number, number | null>
@@ -39,6 +41,7 @@ interface Props {
 
 export function Count({
   lang,
+  onLangChange,
   products,
   index,
   amounts,
@@ -60,6 +63,7 @@ export function Count({
         <p className="progress">
           {index + 1} {s.progress} {products.length}
         </p>
+        <LangToggle lang={lang} onChange={onLangChange} />
       </div>
 
       <ProductCard

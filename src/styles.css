@@ -20,18 +20,34 @@ body {
 .app {
   max-width: 30rem;
   margin: 0 auto;
-  padding: 1rem 1rem 4rem;
+  padding: 1rem 1rem 2rem;
 }
 
 h1 {
   font-size: 1.5rem;
 }
 
+/*
+ * Tres huecos: zona a la izquierda, progreso en medio, idioma a la derecha.
+ * El idioma vive aqui en la pantalla de conteo para no gastar una fila entera
+ * de alto, que es lo que falta con el teclado abierto.
+ */
 .topbar {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
-  padding: 0.5rem 0 1rem;
+  gap: 0.5rem;
+  padding: 0.15rem 0 0.4rem;
+}
+
+.topbar .zone,
+.topbar .progress {
+  margin: 0;
+}
+
+.topbar .lang {
+  flex: none;
+  margin: 0;
 }
 
 .lang {
@@ -88,10 +104,34 @@ h1 {
   margin: 0 0 0.15rem;
 }
 
+/* Boton (i) en linea con el titulo: no gasta una fila propia. */
+button.info {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: none;
+  color: var(--muted);
+  width: 1.4rem;
+  height: 1.4rem;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1;
+  vertical-align: middle;
+  cursor: pointer;
+  flex: none;
+}
+
+button.info[aria-expanded='true'] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .froiz-name {
   font-size: 0.8rem;
   color: var(--muted);
-  margin: 0 0 0.75rem;
+  margin: 0.25rem 0 0.5rem;
 }
 
 .amount {
