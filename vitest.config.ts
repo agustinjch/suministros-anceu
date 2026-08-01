@@ -12,4 +12,10 @@ import { defineConfig } from 'vitest/config'
  */
 export default defineConfig({
   plugins: [react()],
+  test: {
+    // Los worktrees de git viven en .claude/worktrees/ y son copias completas
+    // del repo: sin excluirlos, Vitest recoge dos veces cada test y el total
+    // sale al doble.
+    exclude: ['**/node_modules/**', '**/dist/**', '**/.claude/**'],
+  },
 })
