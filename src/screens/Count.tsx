@@ -52,6 +52,12 @@ export function Count({
         lang={lang}
         value={value}
         onChange={(amount) => onSet(product.id, amount)}
+        // Misma condición que el botón Siguiente: la tecla del teclado no puede
+        // dejar avanzar donde el botón no deja.
+        onEnter={() => {
+          if (answered) onNext()
+        }}
+        enterKeyHint={isLast ? 'done' : 'next'}
       />
 
       <div className="actions">

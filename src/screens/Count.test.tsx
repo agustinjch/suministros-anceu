@@ -1,0 +1,152 @@
+// @vitest-environment jsdom
+import { cleanup, fireEvent, render, screen } from '@testing-library/react'
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import type { Product } from '../lib/types'
+import { Count } from './Count'
+
+afterEach(cleanup)
+
+function product(id: number, name: string, location: Product['location'] = 'cocina'): Product {
+  return {
+    id,
+    name,
+    name_en: name,
+    froiz_name: `Froiz ${name}`,
+    froiz_url: `https://supermercado.froiz.com/product/${id}-x`,
+    image: `/img/${id}.jpg`,
+    target: 4,
+    unit: 'ud',
+    location,
+  }
+}
+
+const products = [
+  product(1, 'Papel de cocina'),
+  product(2, 'Bayetas'),
+  product(3, 'Hielo', 'cafeteria'),
+]
+
+const noop = () => {}
+
+interface Overrides {
+  index?: number
+  amounts?: Record<number, number | null>
+  onSet?: (id: number, amount: number | null) => void
+  onSkip?: (id: number) => void
+  onBack?: () => void
+  onNext?: () => void
+}
+
+function renderCount(overrides: Overrides = {}) {
+  const {
+    index = 0,
+    amounts = {},
+    onSet = noop,
+    onSkip = noop,
+    onBack = noop,
+    onNext = noop,
+  } = overrides
+  return render(
+    <Count
+      lang="es"
+      products={products}
+      index={index}
+      amounts={amounts}
+      onSet={onSet}
+      onSkip={onSkip}
+      onBack={onBack}
+      onNext={onNext}
+    />,
+  )
+}
+
+function input(container: HTMLElement): HTMLInputElement {
+  const el = container.querySelector('input')
+  if (!el) throw new Error('no hay input en la card')
+  return el
+}
+
+describe('Count', () => {
+  it('muestra el progreso y la zona del producto actual', () => {
+    renderCount({ index: 2 })
+    expect(screen.getByText(/3 de 3/)).toBeDefined()
+    expect(screen.getByText('Cafetería')).toBeDefined()
+  })
+
+  it('Atras esta deshabilitado en el primer producto', () => {
+    renderCount({ index: 0 })
+    expect(screen.getByRole('button', { name: 'Atrás' })).toHaveProperty('disabled', true)
+  })
+
+  it('el ultimo producto lleva a Revisar en vez de a Siguiente', () => {
+    renderCount({ index: 2, amounts: { 3: 1 } })
+    expect(screen.getByRole('button', { name: 'Revisar' })).toBeDefined()
+  })
+
+  describe('Siguiente y la tecla del teclado van juntos', () => {
+    it('Siguiente esta deshabilitado sin numero', () => {
+      renderCount({ index: 0, amounts: {} })
+      expect(screen.getByRole('button', { name: 'Siguiente' })).toHaveProperty('disabled', true)
+    })
+
+    it('la tecla tampoco avanza sin numero, igual que el boton', () => {
+      const onNext = vi.fn()
+      const { container } = renderCount({ index: 0, amounts: {}, onNext })
+
+      fireEvent.keyDown(input(container), { key: 'Enter' })
+      expect(onNext).not.toHaveBeenCalled()
+    })
+
+    it('con un numero, la tecla avanza', () => {
+      const onNext = vi.fn()
+      const { container } = renderCount({ index: 0, amounts: { 1: 2 }, onNext })
+
+      fireEvent.keyDown(input(container), { key: 'Enter' })
+      expect(onNext).toHaveBeenCalledOnce()
+    })
+
+    it('un cero cuenta como respuesta: la tecla avanza', () => {
+      const onNext = vi.fn()
+      const { container } = renderCount({ index: 0, amounts: { 1: 0 }, onNext })
+
+      fireEvent.keyDown(input(container), { key: 'Enter' })
+      expect(onNext).toHaveBeenCalledOnce()
+    })
+
+    it('un producto saltado no cuenta como respuesta: la tecla no avanza', () => {
+      const onNext = vi.fn()
+      const { container } = renderCount({ index: 0, amounts: { 1: null }, onNext })
+
+      fireEvent.keyDown(input(container), { key: 'Enter' })
+      expect(onNext).not.toHaveBeenCalled()
+    })
+  })
+
+  it('la tecla se etiqueta done en el ultimo producto y next en los demas', () => {
+    const { container } = renderCount({ index: 0, amounts: { 1: 1 } })
+    expect(input(container).getAttribute('enterkeyhint')).toBe('next')
+    cleanup()
+
+    const last = renderCount({ index: 2, amounts: { 3: 1 } })
+    expect(input(last.container).getAttribute('enterkeyhint')).toBe('done')
+  })
+
+  it('Saltar marca el producto como no contado y avanza', () => {
+    const onSkip = vi.fn()
+    const onNext = vi.fn()
+    renderCount({ index: 1, onSkip, onNext })
+
+    screen.getByRole('button', { name: 'Saltar' }).click()
+    expect(onSkip).toHaveBeenCalledWith(2)
+    expect(onNext).toHaveBeenCalledOnce()
+  })
+
+  it('Saltar funciona aunque no haya numero, al contrario que Siguiente', () => {
+    const onSkip = vi.fn()
+    renderCount({ index: 0, amounts: {}, onSkip })
+
+    expect(screen.getByRole('button', { name: 'Saltar' })).toHaveProperty('disabled', false)
+    screen.getByRole('button', { name: 'Saltar' }).click()
+    expect(onSkip).toHaveBeenCalledWith(1)
+  })
+})

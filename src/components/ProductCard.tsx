@@ -8,6 +8,13 @@ interface Props {
   value: number | null | undefined
   /** `null` significa "campo vacío", NO "saltado": eso lo hace el botón Saltar. */
   onChange: (amount: number | null) => void
+  /**
+   * Se llama al pulsar la tecla de acción del teclado. En el móvil es lo que
+   * hace que el pulgar no tenga que salir del teclado para avanzar.
+   */
+  onEnter: () => void
+  /** Etiqueta de la tecla de acción del teclado móvil. */
+  enterKeyHint: 'next' | 'done'
 }
 
 /**
@@ -16,7 +23,14 @@ interface Props {
  * objetivo sólo aparece en el correo. La unidad sí se muestra, junto al input,
  * porque hace falta para saber si se cuentan botellas o packs.
  */
-export function ProductCard({ product, lang, value, onChange }: Props) {
+export function ProductCard({
+  product,
+  lang,
+  value,
+  onChange,
+  onEnter,
+  enterKeyHint,
+}: Props) {
   const s = t(lang)
   const unit = unitLabel(product.unit, lang)
 
@@ -34,10 +48,19 @@ export function ProductCard({ product, lang, value, onChange }: Props) {
             min={0}
             step={1}
             autoFocus
+            enterKeyHint={enterKeyHint}
             value={typeof value === 'number' ? value : ''}
             onChange={(event) => {
               const raw = event.target.value
               onChange(raw === '' ? null : Math.max(0, Math.trunc(Number(raw))))
+            }}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter') {
+                // El input no está en un <form>, así que Enter no hace nada por
+                // sí solo. preventDefault de todos modos, por si algún día lo está.
+                event.preventDefault()
+                onEnter()
+              }
             }}
           />
           <span className="unit">{unit}</span>

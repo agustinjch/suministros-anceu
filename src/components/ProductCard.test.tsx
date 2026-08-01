@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
-import { cleanup, render, screen } from '@testing-library/react'
-import { afterEach, describe, expect, it } from 'vitest'
+import { cleanup, fireEvent, render, screen } from '@testing-library/react'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import type { Product } from '../lib/types'
 import { ProductCard } from './ProductCard'
 
@@ -37,12 +37,41 @@ const lejia: Product = {
 
 const noop = () => {}
 
+interface Overrides {
+  product?: Product
+  lang?: 'es' | 'en'
+  value?: number | null
+  onChange?: (amount: number | null) => void
+  onEnter?: () => void
+  enterKeyHint?: 'next' | 'done'
+}
+
+/** Render con props por defecto: cada test solo declara lo que le importa. */
+function renderCard(overrides: Overrides = {}) {
+  const {
+    product = shandy,
+    lang = 'es',
+    value = undefined,
+    onChange = noop,
+    onEnter = noop,
+    enterKeyHint = 'next',
+  } = overrides
+  return render(
+    <ProductCard
+      product={product}
+      lang={lang}
+      value={value}
+      onChange={onChange}
+      onEnter={onEnter}
+      enterKeyHint={enterKeyHint}
+    />,
+  )
+}
+
 describe('ProductCard', () => {
   it('no muestra cuanto deberia haber', () => {
     for (const lang of ['es', 'en'] as const) {
-      const { container } = render(
-        <ProductCard product={lejia} lang={lang} value={undefined} onChange={noop} />,
-      )
+      const { container } = renderCard({ product: lejia, lang: lang, value: undefined })
       // El objetivo es 5 y no hay ningun otro digito en la card.
       expect(container.textContent, lang).not.toContain('5')
       expect(container.textContent, lang).not.toMatch(/deber[ií]a/i)
@@ -52,43 +81,67 @@ describe('ProductCard', () => {
   })
 
   it('tampoco lo muestra con un valor ya metido', () => {
-    const { container } = render(
-      <ProductCard product={lejia} lang="es" value={2} onChange={noop} />,
-    )
+    const { container } = renderCard({ product: lejia, lang: 'es', value: 2 })
     expect(container.textContent).not.toContain('5')
   })
 
   it('si muestra la unidad, que hace falta para saber que se cuenta', () => {
-    render(<ProductCard product={shandy} lang="es" value={undefined} onChange={noop} />)
+    renderCard({ product: shandy, lang: 'es', value: undefined })
     expect(screen.getByText('packs')).toBeDefined()
   })
 
   it('muestra el nombre y el nombre canonico de Froiz', () => {
-    render(<ProductCard product={shandy} lang="es" value={undefined} onChange={noop} />)
+    renderCard({ product: shandy, lang: 'es', value: undefined })
     expect(screen.getByText('Shandy (pack de 6)')).toBeDefined()
     expect(screen.getByText('Cerveza Cruzcampo Shandy limón pack 6x25 cl')).toBeDefined()
   })
 
   it('traduce el nombre y la unidad al ingles', () => {
-    render(<ProductCard product={shandy} lang="en" value={undefined} onChange={noop} />)
+    renderCard({ product: shandy, lang: 'en', value: undefined })
     expect(screen.getByText('Shandy, lemon (6-pack)')).toBeDefined()
     expect(screen.getByText('packs')).toBeDefined()
   })
 
   it('el input sale vacio cuando el producto esta saltado o sin tocar', () => {
-    const { container } = render(
-      <ProductCard product={shandy} lang="es" value={null} onChange={noop} />,
-    )
+    const { container } = renderCard({ product: shandy, lang: 'es', value: null })
     const input = container.querySelector('input')
     expect(input?.value).toBe('')
   })
 
   it('el input saca teclado numerico en el movil', () => {
-    const { container } = render(
-      <ProductCard product={shandy} lang="es" value={2} onChange={noop} />,
-    )
+    const { container } = renderCard({ product: shandy, lang: 'es', value: 2 })
     const input = container.querySelector('input')
     expect(input?.getAttribute('inputmode')).toBe('numeric')
     expect(input?.value).toBe('2')
+  })
+
+  describe('tecla de accion del teclado', () => {
+    it('la etiqueta de la tecla es "next" o "done" segun se le pase', () => {
+      const { container } = renderCard({ enterKeyHint: 'next' })
+      expect(container.querySelector('input')?.getAttribute('enterkeyhint')).toBe('next')
+      cleanup()
+
+      const last = renderCard({ enterKeyHint: 'done' })
+      expect(last.container.querySelector('input')?.getAttribute('enterkeyhint')).toBe('done')
+    })
+
+    it('Enter avisa al padre, que es lo que permite avanzar sin salir del teclado', () => {
+      const onEnter = vi.fn()
+      const { container } = renderCard({ value: 3, onEnter })
+
+      fireEvent.keyDown(container.querySelector('input')!, { key: 'Enter' })
+      expect(onEnter).toHaveBeenCalledOnce()
+    })
+
+    it('otras teclas no avisan', () => {
+      const onEnter = vi.fn()
+      const { container } = renderCard({ value: 3, onEnter })
+      const input = container.querySelector('input')!
+
+      for (const key of ['a', 'Tab', 'Escape', 'ArrowDown', '5']) {
+        fireEvent.keyDown(input, { key })
+      }
+      expect(onEnter).not.toHaveBeenCalled()
+    })
   })
 })
