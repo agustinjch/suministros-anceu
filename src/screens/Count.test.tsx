@@ -131,6 +131,30 @@ describe('Count', () => {
     expect(input(last.container).getAttribute('enterkeyhint')).toBe('done')
   })
 
+  describe('los botones no cierran el teclado del movil', () => {
+    it('los tres botones impiden el cambio de foco en mousedown', () => {
+      renderCount({ index: 1, amounts: { 2: 1 } })
+
+      for (const name of ['Atrás', 'Saltar', 'Siguiente']) {
+        const button = screen.getByRole('button', { name })
+        // fireEvent.mouseDown devuelve false si algun handler llamo a
+        // preventDefault, que es exactamente lo que evita que el boton robe el
+        // foco al input y cierre el teclado.
+        expect(fireEvent.mouseDown(button), name).toBe(false)
+      }
+    })
+
+    it('aun asi el click funciona: preventDefault en mousedown no lo cancela', () => {
+      const onNext = vi.fn()
+      renderCount({ index: 0, amounts: { 1: 3 }, onNext })
+      const next = screen.getByRole('button', { name: 'Siguiente' })
+
+      fireEvent.mouseDown(next)
+      fireEvent.click(next)
+      expect(onNext).toHaveBeenCalledOnce()
+    })
+  })
+
   it('Saltar marca el producto como no contado y avanza', () => {
     const onSkip = vi.fn()
     const onNext = vi.fn()

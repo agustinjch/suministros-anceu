@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { productName, t, unitLabel, type Lang } from '../lib/i18n'
 import type { Product } from '../lib/types'
 
@@ -33,6 +34,27 @@ export function ProductCard({
 }: Props) {
   const s = t(lang)
   const unit = unitLabel(product.unit, lang)
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  /**
+   * Al pasar de producto React NO remonta esta card: reutiliza el mismo nodo
+   * `<input>` y solo le cambia el valor. Por eso `autoFocus` no sirve — solo
+   * actúa al montar. Sin esto, al pulsar "Siguiente" el foco se queda en el
+   * botón, el teclado se cierra y la card siguiente sale sin teclado.
+   *
+   * Depende de `product.id` y no del índice, para que también funcione al
+   * volver a una card concreta desde la pantalla de revisión.
+   */
+  useEffect(() => {
+    const input = inputRef.current
+    if (!input) return
+    input.focus()
+    // Intento de seleccionar lo que ya hubiera, para que teclear lo reemplace en
+    // vez de convertir un 3 en un 35. Es best-effort: la API de selección no
+    // aplica formalmente a los input de tipo number, aunque Chrome la respeta.
+    // Si el navegador la ignora, no pasa nada.
+    input.select()
+  }, [product.id])
 
   return (
     <div className="card">
@@ -43,11 +65,11 @@ export function ProductCard({
         <span>{s.howMany}</span>
         <div className="amount">
           <input
+            ref={inputRef}
             type="number"
             inputMode="numeric"
             min={0}
             step={1}
-            autoFocus
             enterKeyHint={enterKeyHint}
             value={typeof value === 'number' ? value : ''}
             onChange={(event) => {

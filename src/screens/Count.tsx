@@ -10,6 +10,21 @@ const ZONE_KEY: Record<Zone, keyof Strings> = {
   cafeteria: 'zoneCafeteria',
 }
 
+/**
+ * Evita que el botón robe el foco al input, de modo que el teclado del móvil no
+ * se cierre al pulsarlo. Va en `mousedown` y no en `pointerdown` a propósito:
+ * `preventDefault` en mousedown impide el cambio de foco sin impedir el `click`,
+ * que es un patrón viejo y estable; hacerlo en pointerdown suprime los eventos
+ * de compatibilidad de ratón y hay navegadores donde el click se pierde.
+ *
+ * Es la mitad importante del arreglo: mantener el teclado abierto es fiable,
+ * mientras que reabrirlo con un `focus()` programático depende de que Android
+ * considere que sigues dentro del gesto del usuario.
+ */
+function keepFocusInInput(event: React.MouseEvent<HTMLButtonElement>): void {
+  event.preventDefault()
+}
+
 interface Props {
   lang: Lang
   products: Product[]
@@ -61,12 +76,19 @@ export function Count({
       />
 
       <div className="actions">
-        <button type="button" className="secondary" onClick={onBack} disabled={index === 0}>
+        <button
+          type="button"
+          className="secondary"
+          onMouseDown={keepFocusInInput}
+          onClick={onBack}
+          disabled={index === 0}
+        >
           {s.back}
         </button>
         <button
           type="button"
           className="ghost"
+          onMouseDown={keepFocusInInput}
           onClick={() => {
             onSkip(product.id)
             onNext()
@@ -74,7 +96,13 @@ export function Count({
         >
           {s.skip}
         </button>
-        <button type="button" className="primary" onClick={onNext} disabled={!answered}>
+        <button
+          type="button"
+          className="primary"
+          onMouseDown={keepFocusInInput}
+          onClick={onNext}
+          disabled={!answered}
+        >
           {isLast ? s.review : s.next}
         </button>
       </div>

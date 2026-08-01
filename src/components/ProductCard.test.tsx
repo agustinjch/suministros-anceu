@@ -115,6 +115,75 @@ describe('ProductCard', () => {
     expect(input?.value).toBe('2')
   })
 
+  describe('foco', () => {
+    it('el input arranca enfocado', () => {
+      const { container } = renderCard()
+      expect(document.activeElement).toBe(container.querySelector('input'))
+    })
+
+    it('recupera el foco al cambiar de producto, aunque React reutilice el input', () => {
+      const { container, rerender } = render(
+        <ProductCard
+          product={shandy}
+          lang="es"
+          value={2}
+          onChange={noop}
+          onEnter={noop}
+          enterKeyHint="next"
+        />,
+      )
+      const first = container.querySelector('input')
+
+      // Simula lo que hace pulsar "Siguiente": el foco se va del input.
+      first?.blur()
+      expect(document.activeElement).not.toBe(first)
+
+      rerender(
+        <ProductCard
+          product={lejia}
+          lang="es"
+          value={undefined}
+          onChange={noop}
+          onEnter={noop}
+          enterKeyHint="next"
+        />,
+      )
+
+      // Mismo nodo reutilizado por React, pero enfocado de nuevo.
+      const second = container.querySelector('input')
+      expect(second).toBe(first)
+      expect(document.activeElement).toBe(second)
+    })
+
+    it('no se re-enfoca al teclear en el mismo producto', () => {
+      const { container, rerender } = render(
+        <ProductCard
+          product={shandy}
+          lang="es"
+          value={1}
+          onChange={noop}
+          onEnter={noop}
+          enterKeyHint="next"
+        />,
+      )
+      container.querySelector('input')?.blur()
+
+      // Mismo producto, otro valor: el efecto depende de product.id, asi que no
+      // debe robar el foco mientras el usuario escribe.
+      rerender(
+        <ProductCard
+          product={shandy}
+          lang="es"
+          value={12}
+          onChange={noop}
+          onEnter={noop}
+          enterKeyHint="next"
+        />,
+      )
+      expect(document.activeElement).not.toBe(container.querySelector('input'))
+    })
+  })
+
   describe('tecla de accion del teclado', () => {
     it('la etiqueta de la tecla es "next" o "done" segun se le pase', () => {
       const { container } = renderCard({ enterKeyHint: 'next' })
