@@ -17,7 +17,7 @@
     "froiz_name": "Papel Froiz hornos antiadherente 20 hojas",
     "froiz_url": "https://supermercado.froiz.com/product/23293-papel-froiz-hornos-antiadherente-20-hojas",
     "image": "/img/23293.jpg",
-    "target": 7,
+    "target": 4,
     "unit": "ud",
     "location": "cocina"
   },
@@ -28,7 +28,7 @@
     "froiz_name": "Papel aluminio Froiz 30 m",
     "froiz_url": "https://supermercado.froiz.com/product/23646-papel-aluminio-froiz-30-m",
     "image": "/img/23646.jpg",
-    "target": 6,
+    "target": 4,
     "unit": "ud",
     "location": "cocina"
   },
@@ -61,7 +61,7 @@
     "froiz_name": "Servilletas Froiz 39x39 cm doble hoja blancas 60 u",
     "froiz_url": "https://supermercado.froiz.com/product/2527-servilletas-froiz-39x39-cm-doble-hoja-blancas-60-u",
     "image": "/img/2527.jpg",
-    "target": 6,
+    "target": 5,
     "unit": "ud",
     "location": "cocina"
   },
@@ -72,7 +72,7 @@
     "froiz_name": "Bolsa Basura Selex jardín cierra fácil 10 unidades 85x105 100 litros",
     "froiz_url": "https://supermercado.froiz.com/product/57172-bolsa-basura-selex-jardin-cierra-facil-10-unidades-85x105-100-litros",
     "image": "/img/57172.jpg",
-    "target": 5,
+    "target": 3,
     "unit": "ud",
     "location": "cocina"
   },
@@ -83,7 +83,7 @@
     "froiz_name": "Bolsa basura Selex amarilla autocierre 30 l 30 u",
     "froiz_url": "https://supermercado.froiz.com/product/45113-bolsa-basura-selex-amarilla-autocierre-30-l-30-u",
     "image": "/img/45113.jpg",
-    "target": 4,
+    "target": 3,
     "unit": "ud",
     "location": "cocina"
   },
@@ -94,7 +94,7 @@
     "froiz_name": "Bayeta Froiz multiusos color 6 u",
     "froiz_url": "https://supermercado.froiz.com/product/79223-bayeta-froiz-multiusos-color-6-u",
     "image": "/img/79223.jpg",
-    "target": 4,
+    "target": 3,
     "unit": "ud",
     "location": "cocina"
   },
@@ -105,7 +105,7 @@
     "froiz_name": "Estropajo Froiz salvauñas pack-3",
     "froiz_url": "https://supermercado.froiz.com/product/27895-estropajo-froiz-salvaunas-pack-3",
     "image": "/img/27895.jpg",
-    "target": 4,
+    "target": 3,
     "unit": "ud",
     "location": "cocina"
   },
@@ -116,7 +116,7 @@
     "froiz_name": "Almohadilla limpieza Froiz superficies delicadas 2 u",
     "froiz_url": "https://supermercado.froiz.com/product/21716-almohadilla-limpieza-froiz-superficies-delicadas-2-u",
     "image": "/img/21716.jpg",
-    "target": 4,
+    "target": 3,
     "unit": "ud",
     "location": "cocina"
   },
@@ -127,7 +127,7 @@
     "froiz_name": "Detergente Froiz líquido Marsella 3 l",
     "froiz_url": "https://supermercado.froiz.com/product/56093-detergente-froiz-liquido-marsella-3-l",
     "image": "/img/56093.jpg",
-    "target": 4,
+    "target": 3,
     "unit": "ud",
     "location": "limpieza"
   },
@@ -138,7 +138,7 @@
     "froiz_name": "Suavizante Vernel concentrado Maldivas 55 lavados",
     "froiz_url": "https://supermercado.froiz.com/product/48857-suavizante-vernel-concentrado-maldivas-55-lavados",
     "image": "/img/48857.jpg",
-    "target": 4,
+    "target": 3,
     "unit": "ud",
     "location": "limpieza"
   },
@@ -149,7 +149,7 @@
     "froiz_name": "Insecticida Casa Jardín 600 ml",
     "froiz_url": "https://supermercado.froiz.com/product/20124-insecticida-casa-jardin-600-ml",
     "image": "/img/20124.jpg",
-    "target": 5,
+    "target": 3,
     "unit": "ud",
     "location": "limpieza"
   },
@@ -204,7 +204,7 @@
     "froiz_name": "Quitagrasa Zorka pistola 750 ml",
     "froiz_url": "https://supermercado.froiz.com/product/2283-quitagrasa-zorka-pistola-750-ml",
     "image": "/img/2283.jpg",
-    "target": 3,
+    "target": 2,
     "unit": "ud",
     "location": "limpieza"
   },
@@ -215,7 +215,18 @@
     "froiz_name": "Lejía Froiz con detergente 2 l",
     "froiz_url": "https://supermercado.froiz.com/product/4976-lejia-froiz-con-detergente-2-l",
     "image": "/img/4976.jpg",
-    "target": 5,
+    "target": 3,
+    "unit": "ud",
+    "location": "limpieza"
+  },
+  {
+    "id": 4975,
+    "name": "Lejía para lavadoras",
+    "name_en": "Washing machine bleach",
+    "froiz_name": "Lejía Froiz lavadoras 2 l",
+    "froiz_url": "https://supermercado.froiz.com/product/4975-lejia-froiz-lavadoras-2-l",
+    "image": "/img/4975.jpg",
+    "target": 3,
     "unit": "ud",
     "location": "limpieza"
   },
@@ -347,7 +358,7 @@
     "froiz_name": "Mermelada Froiz fresa extra sin azúcar 350 g",
     "froiz_url": "https://supermercado.froiz.com/product/58871-mermelada-froiz-fresa-extra-sin-azucar-350-g",
     "image": "/img/58871.jpg",
-    "target": 4,
+    "target": 2,
     "unit": "ud",
     "location": "comida"
   },
@@ -369,7 +380,7 @@
     "froiz_name": "Coca-Cola original lata pack 12x33 cl",
     "froiz_url": "https://supermercado.froiz.com/product/9753-coca-cola-original-lata-pack-12x33-cl",
     "image": "/img/9753.jpg",
-    "target": 5,
+    "target": 2,
     "unit": "pack",
     "location": "bebidas"
   },
