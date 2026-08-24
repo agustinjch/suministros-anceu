@@ -1,11 +1,12 @@
 import { t, type Lang } from '../lib/i18n'
 
-export function Sent({ lang }: { lang: Lang }) {
+export function Sent({ lang, onHome }: { lang: Lang; onHome: () => void }) {
   const s = t(lang)
   return (
     <>
       <h1>{s.sentTitle}</h1>
       <p>{s.sentBody}</p>
+      <button type="button" className="primary" onClick={onHome}>{s.backHome}</button>
     </>
   )
 }

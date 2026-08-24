@@ -46,4 +46,11 @@ describe('i18n', () => {
       }
     }
   })
+
+  it('traduce la portada y las instrucciones de las pizarras', () => {
+    expect(t('es').taskBeverages).toBe('Pizarra de bebidas')
+    expect(t('en').taskLaundry).toBe('Laundry whiteboard')
+    expect(t('es').eraseConfirmation).toContain('borrado')
+    expect(t('en').chooseGallery).toContain('gallery')
+  })
 })

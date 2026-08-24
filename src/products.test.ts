@@ -6,9 +6,9 @@ import products from './products.json'
 const catalog = products as Product[]
 
 describe('products.json', () => {
-  it('tiene 46 productos sin ids repetidos', () => {
-    expect(catalog).toHaveLength(46)
-    expect(new Set(catalog.map((p) => p.id)).size).toBe(46)
+  it('tiene 47 productos sin ids repetidos', () => {
+    expect(catalog).toHaveLength(47)
+    expect(new Set(catalog.map((p) => p.id)).size).toBe(47)
   })
 
   it('todos los campos estan rellenos', () => {

@@ -1,6 +1,26 @@
 import { ZONES, type CountEntry, type Product, type Session } from './types'
 
 const KEY = 'suministros-anceu:session'
+const NAME_KEY = 'suministros-anceu:person-name'
+const MAX_NAME = 80
+
+export function loadRememberedName(): string {
+  try {
+    return (localStorage.getItem(NAME_KEY) ?? '').trim().slice(0, MAX_NAME)
+  } catch {
+    return ''
+  }
+}
+
+export function saveRememberedName(name: string): void {
+  const normalized = name.trim().slice(0, MAX_NAME)
+  if (!normalized) return
+  try {
+    localStorage.setItem(NAME_KEY, normalized)
+  } catch {
+    // El nombre es una comodidad; la tarea puede seguir si el navegador no guarda.
+  }
+}
 
 function isSession(value: unknown): value is Session {
   if (typeof value !== 'object' || value === null) return false

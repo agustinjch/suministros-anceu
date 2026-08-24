@@ -37,6 +37,32 @@ export interface Strings {
   zoneComida: string
   zoneBebidas: string
   zoneCafeteria: string
+  homeTitle: string
+  homeIntro: string
+  taskSupplies: string
+  taskBeverages: string
+  taskLaundry: string
+  whiteboardIntro: string
+  whiteboardRulePhoto: string
+  whiteboardRuleReadable: string
+  whiteboardRuleBlank: string
+  whiteboardRuleErase: string
+  nameRequired: string
+  takePhoto: string
+  chooseGallery: string
+  photoRecommendation: string
+  processingPhoto: string
+  replacePhoto: string
+  eraseNow: string
+  eraseConfirmation: string
+  sendWhiteboard: string
+  whiteboardSendFailed: string
+  photoInvalid: string
+  photoSaveFailed: string
+  discardDraft: string
+  backHome: string
+  whiteboardSentTitle: string
+  whiteboardSentBody: string
 }
 
 const ES: Strings = {
@@ -69,6 +95,32 @@ const ES: Strings = {
   zoneComida: 'Comida',
   zoneBebidas: 'Bebidas',
   zoneCafeteria: 'Cafetería',
+  homeTitle: 'Tareas semanales',
+  homeIntro: '¿Qué tarea vas a hacer?',
+  taskSupplies: 'Suministros',
+  taskBeverages: 'Pizarra de bebidas',
+  taskLaundry: 'Pizarra de lavandería',
+  whiteboardIntro: 'Haz una foto legible antes de borrar la pizarra.',
+  whiteboardRulePhoto: 'Fotografía la pizarra antes de borrarla.',
+  whiteboardRuleReadable: 'Amplía la foto y comprueba que todo se lee.',
+  whiteboardRuleBlank: 'Aunque esté vacía, hay que fotografiarla.',
+  whiteboardRuleErase: 'Bórrala completamente después de guardar una foto válida.',
+  nameRequired: 'Escribe tu nombre para continuar.',
+  takePhoto: 'Hacer una foto',
+  chooseGallery: 'Elegir de la galería',
+  photoRecommendation: 'Recomendamos usar primero la cámara normal para conservar una copia.',
+  processingPhoto: 'Preparando y guardando la foto…',
+  replacePhoto: 'Cambiar foto',
+  eraseNow: 'La foto está guardada. Borra ahora la pizarra completamente.',
+  eraseConfirmation: 'He borrado la pizarra',
+  sendWhiteboard: 'Enviar whiteboard',
+  whiteboardSendFailed: 'No se pudo enviar. La foto sigue guardada aquí.',
+  photoInvalid: 'No pudimos leer esa imagen. Elige otra foto o una versión JPEG/PNG.',
+  photoSaveFailed: 'No se pudo guardar la foto con seguridad. No borres todavía la pizarra.',
+  discardDraft: 'Descartar borrador',
+  backHome: '← Volver al inicio',
+  whiteboardSentTitle: '¡Pizarra enviada!',
+  whiteboardSentBody: 'La foto ya está en hello@anceu.com. Gracias.',
 }
 
 const EN: Strings = {
@@ -101,6 +153,32 @@ const EN: Strings = {
   zoneComida: 'Food',
   zoneBebidas: 'Drinks',
   zoneCafeteria: 'Coffee bar',
+  homeTitle: 'Weekly tasks',
+  homeIntro: 'Which task are you doing?',
+  taskSupplies: 'Supplies',
+  taskBeverages: 'Beverage whiteboard',
+  taskLaundry: 'Laundry whiteboard',
+  whiteboardIntro: 'Take a readable photo before erasing the whiteboard.',
+  whiteboardRulePhoto: 'Photograph the whiteboard before erasing it.',
+  whiteboardRuleReadable: 'Zoom in and check that all writing is readable.',
+  whiteboardRuleBlank: 'A blank whiteboard still requires a photo.',
+  whiteboardRuleErase: 'Erase it completely after a valid photo is safely stored.',
+  nameRequired: 'Enter your name to continue.',
+  takePhoto: 'Take a photo',
+  chooseGallery: 'Choose from gallery',
+  photoRecommendation: 'We recommend using the normal camera first so a copy stays in your gallery.',
+  processingPhoto: 'Preparing and saving the photo…',
+  replacePhoto: 'Replace photo',
+  eraseNow: 'The photo is saved. Now erase the whiteboard completely.',
+  eraseConfirmation: 'I have erased the whiteboard',
+  sendWhiteboard: 'Send whiteboard',
+  whiteboardSendFailed: 'Could not send. The photo is still saved here.',
+  photoInvalid: 'We could not read that image. Choose another photo or a JPEG/PNG version.',
+  photoSaveFailed: 'The photo could not be stored safely. Do not erase the whiteboard yet.',
+  discardDraft: 'Discard draft',
+  backHome: '← Back to home',
+  whiteboardSentTitle: 'Whiteboard sent!',
+  whiteboardSentBody: 'The photo is now in hello@anceu.com. Thanks.',
 }
 
 export function t(lang: Lang): Strings {

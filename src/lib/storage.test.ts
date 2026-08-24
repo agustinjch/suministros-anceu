@@ -1,10 +1,22 @@
 // @vitest-environment jsdom
-import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { clearSession, loadSession, saveSession, sortByZone, toCountEntries } from './storage'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import {
+  clearSession,
+  loadRememberedName,
+  loadSession,
+  saveRememberedName,
+  saveSession,
+  sortByZone,
+  toCountEntries,
+} from './storage'
 import type { Product, Session } from './types'
 
 beforeEach(() => {
   localStorage.clear()
+})
+
+afterEach(() => {
+  vi.restoreAllMocks()
 })
 
 const session: Session = {
@@ -57,6 +69,28 @@ describe('session storage', () => {
       throw new Error('QuotaExceededError')
     })
     expect(() => saveSession(session)).not.toThrow()
+  })
+})
+
+describe('remembered person', () => {
+  it('trims and restores a non-empty name', () => {
+    saveRememberedName('  Marta  ')
+    expect(loadRememberedName()).toBe('Marta')
+  })
+
+  it('keeps the remembered name when the supplies session is cleared', () => {
+    saveRememberedName('Brais')
+    saveSession(session)
+    clearSession()
+    expect(loadRememberedName()).toBe('Brais')
+  })
+
+  it('ignores blank names and caps long names at 80 characters', () => {
+    saveRememberedName('Marta')
+    saveRememberedName('   ')
+    expect(loadRememberedName()).toBe('Marta')
+    saveRememberedName('a'.repeat(100))
+    expect(loadRememberedName()).toBe('a'.repeat(80))
   })
 })
 

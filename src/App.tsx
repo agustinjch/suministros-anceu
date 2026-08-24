@@ -1,16 +1,20 @@
 import { useEffect, useMemo, useState } from 'react'
 import { LangToggle } from './components/LangToggle'
 import { loadLang, saveLang, type Lang } from './lib/i18n'
-import { clearSession, loadSession, saveSession, sortByZone, toCountEntries } from './lib/storage'
+import { clearSession, loadRememberedName, loadSession, saveRememberedName, saveSession, sortByZone, toCountEntries } from './lib/storage'
 import productsJson from './products.json'
 import { Count } from './screens/Count'
 import { Review, type SendStatus } from './screens/Review'
 import { Sent } from './screens/Sent'
 import { Start } from './screens/Start'
+import { Home } from './screens/Home'
+import { Whiteboard } from './screens/Whiteboard'
+import { WhiteboardSent } from './screens/WhiteboardSent'
 import './styles.css'
 import type { Product, Session } from './lib/types'
+import type { WhiteboardType } from './lib/whiteboards'
 
-type Screen = 'start' | 'count' | 'review' | 'sent'
+type Screen = 'home' | 'start' | 'count' | 'review' | 'sent' | 'whiteboard' | 'whiteboard-sent'
 
 const EMPTY: Session = { counterName: '', amounts: {} }
 
@@ -18,15 +22,12 @@ export function App() {
   const products = useMemo(() => sortByZone(productsJson as Product[]), [])
 
   const [lang, setLang] = useState<Lang>(loadLang)
-  const [screen, setScreen] = useState<Screen>('start')
+  const [screen, setScreen] = useState<Screen>('home')
   const [index, setIndex] = useState(0)
   const [session, setSession] = useState<Session>(EMPTY)
-  const [saved, setSaved] = useState<Session | null>(null)
+  const [saved, setSaved] = useState<Session | null>(loadSession)
   const [status, setStatus] = useState<SendStatus>('idle')
-
-  useEffect(() => {
-    setSaved(loadSession())
-  }, [])
+  const [whiteboard, setWhiteboard] = useState<WhiteboardType>('beverages')
 
   useEffect(() => {
     saveLang(lang)
@@ -96,13 +97,32 @@ export function App() {
       */}
       {screen !== 'count' && <LangToggle lang={lang} onChange={setLang} />}
 
+      {screen === 'home' && (
+        <Home
+          lang={lang}
+          onSupplies={() => {
+            if (!saved && !session.counterName) {
+              setSession({ ...session, counterName: loadRememberedName() })
+            }
+            setScreen('start')
+          }}
+          onWhiteboard={(board) => {
+            setWhiteboard(board)
+            setScreen('whiteboard')
+          }}
+        />
+      )}
+
       {screen === 'start' && (
         <Start
           lang={lang}
           total={products.length}
           counterName={session.counterName}
           hasSaved={saved !== null}
-          onNameChange={(counterName) => persist({ ...session, counterName })}
+          onNameChange={(counterName) => {
+            persist({ ...session, counterName })
+            if (counterName.trim()) saveRememberedName(counterName)
+          }}
           onStart={() => setScreen('count')}
           onResume={() => {
             if (saved) setSession(saved)
@@ -114,6 +134,7 @@ export function App() {
             setSession(EMPTY)
             setScreen('count')
           }}
+          onHome={() => setScreen('home')}
         />
       )}
 
@@ -151,7 +172,20 @@ export function App() {
         />
       )}
 
-      {screen === 'sent' && <Sent lang={lang} />}
+      {screen === 'sent' && <Sent lang={lang} onHome={() => setScreen('home')} />}
+
+      {screen === 'whiteboard' && (
+        <Whiteboard
+          board={whiteboard}
+          lang={lang}
+          onHome={() => setScreen('home')}
+          onSent={() => setScreen('whiteboard-sent')}
+        />
+      )}
+
+      {screen === 'whiteboard-sent' && (
+        <WhiteboardSent lang={lang} onHome={() => setScreen('home')} />
+      )}
     </main>
   )
 }

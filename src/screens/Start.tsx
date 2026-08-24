@@ -9,6 +9,7 @@ interface Props {
   onStart: () => void
   onResume: () => void
   onStartOver: () => void
+  onHome: () => void
 }
 
 export function Start({
@@ -20,11 +21,13 @@ export function Start({
   onStart,
   onResume,
   onStartOver,
+  onHome,
 }: Props) {
   const s = t(lang)
 
   return (
     <>
+      <button type="button" className="back-home" onClick={onHome}>{s.backHome}</button>
       <h1>{s.appTitle}</h1>
       <p>{s.intro}</p>
       <p className="progress">
