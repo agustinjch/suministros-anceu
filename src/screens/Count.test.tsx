@@ -23,7 +23,7 @@ function product(id: number, name: string, location: Product['location'] = 'coci
 const products = [
   product(1, 'Papel de cocina'),
   product(2, 'Bayetas'),
-  product(3, 'Hielo', 'cafeteria'),
+  product(3, 'Vinagre de limpieza', 'armario_limpieza' as Product['location']),
 ]
 
 const noop = () => {}
@@ -73,7 +73,7 @@ describe('Count', () => {
   it('muestra el progreso y la zona del producto actual', () => {
     renderCount({ index: 2 })
     expect(screen.getByText(/3 de 3/)).toBeDefined()
-    expect(screen.getByText('Cafetería')).toBeDefined()
+    expect(screen.getByText('Armario limpieza')).toBeDefined()
   })
 
   it('Atras esta deshabilitado en el primer producto', () => {

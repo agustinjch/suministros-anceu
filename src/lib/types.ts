@@ -1,9 +1,22 @@
 export type Unit = 'ud' | 'pack' | 'bolsa' | 'kg'
 
-export type Zone = 'cocina' | 'limpieza' | 'comida' | 'bebidas' | 'cafeteria'
+export type Zone =
+  | 'armario_limpieza'
+  | 'despensa'
+  | 'cafeteria'
+  | 'armario_despensa'
+  | 'congelador'
+  | 'cocina'
 
 /** Orden de recorrido de la casa. No reordenar sin motivo: es el camino físico. */
-export const ZONES: readonly Zone[] = ['cocina', 'limpieza', 'comida', 'bebidas', 'cafeteria']
+export const ZONES: readonly Zone[] = [
+  'armario_limpieza',
+  'despensa',
+  'cafeteria',
+  'armario_despensa',
+  'congelador',
+  'cocina',
+]
 
 export interface Product {
   id: number

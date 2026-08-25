@@ -4,11 +4,12 @@ import { t, type Lang, type Strings } from '../lib/i18n'
 import type { Product, Zone } from '../lib/types'
 
 const ZONE_KEY: Record<Zone, keyof Strings> = {
-  cocina: 'zoneCocina',
-  limpieza: 'zoneLimpieza',
-  comida: 'zoneComida',
-  bebidas: 'zoneBebidas',
+  armario_limpieza: 'zoneArmarioLimpieza',
+  despensa: 'zoneDespensa',
   cafeteria: 'zoneCafeteria',
+  armario_despensa: 'zoneArmarioDespensa',
+  congelador: 'zoneCongelador',
+  cocina: 'zoneCocina',
 }
 
 /**

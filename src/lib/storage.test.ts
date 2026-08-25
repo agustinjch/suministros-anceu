@@ -106,11 +106,23 @@ describe('toCountEntries', () => {
 describe('sortByZone', () => {
   it('ordena por el recorrido de la casa, no por el orden de entrada', () => {
     const sorted = sortByZone([
-      product(1, 'cafeteria'),
+      product(1, 'cocina'),
       product(2, 'cocina'),
-      product(3, 'bebidas'),
+      product(3, 'armario_limpieza' as Product['location']),
+      product(4, 'congelador' as Product['location']),
+      product(5, 'despensa' as Product['location']),
+      product(6, 'cafeteria'),
+      product(7, 'armario_despensa' as Product['location']),
     ])
-    expect(sorted.map((p) => p.location)).toEqual(['cocina', 'bebidas', 'cafeteria'])
+    expect(sorted.map((p) => p.location)).toEqual([
+      'armario_limpieza',
+      'despensa',
+      'cafeteria',
+      'armario_despensa',
+      'congelador',
+      'cocina',
+      'cocina',
+    ])
   })
 
   it('mantiene el orden original dentro de cada zona', () => {

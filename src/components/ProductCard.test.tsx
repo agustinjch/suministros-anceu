@@ -15,7 +15,7 @@ const shandy: Product = {
   image: '/img/7292.jpg',
   target: 5,
   unit: 'pack',
-  location: 'bebidas',
+  location: 'armario_despensa',
 }
 
 /**
@@ -32,7 +32,7 @@ const lejia: Product = {
   image: '/img/4976.jpg',
   target: 5,
   unit: 'ud',
-  location: 'limpieza',
+  location: 'armario_limpieza',
 }
 
 const noop = () => {}

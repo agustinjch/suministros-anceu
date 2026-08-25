@@ -6,9 +6,21 @@ import products from './products.json'
 const catalog = products as Product[]
 
 describe('products.json', () => {
-  it('tiene 47 productos sin ids repetidos', () => {
-    expect(catalog).toHaveLength(47)
-    expect(new Set(catalog.map((p) => p.id)).size).toBe(47)
+  it('tiene 49 productos sin ids repetidos', () => {
+    expect(catalog).toHaveLength(49)
+    expect(new Set(catalog.map((p) => p.id)).size).toBe(49)
+  })
+
+  it('sigue el recorrido físico acordado sin obligar a volver atrás', () => {
+    expect(catalog.map((p) => p.id)).toEqual([
+      2565, 56093, 48857, 20124, 22699, 23085, 38910, 45271, 2283, 4976,
+      4975, 15086, 40240, 51629, 54375, 18973,
+      38762, 57172, 45113, 79223, 27895, 21716, 4598,
+      10360, 41183, 50152, 50154, 1827, 1924, 51190, 15592,
+      23293, 23646, 5406, 2527, 7292, 9753, 9106, 7670, 37283,
+      45365, 45372, 68507, 44312,
+      5014, 5034, 23977, 46677, 58871,
+    ])
   })
 
   it('todos los campos estan rellenos', () => {

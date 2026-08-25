@@ -32,11 +32,12 @@ export interface Strings {
   sentBody: string
   progress: string
   products: string
-  zoneCocina: string
-  zoneLimpieza: string
-  zoneComida: string
-  zoneBebidas: string
+  zoneArmarioLimpieza: string
+  zoneDespensa: string
   zoneCafeteria: string
+  zoneArmarioDespensa: string
+  zoneCongelador: string
+  zoneCocina: string
   homeTitle: string
   homeIntro: string
   taskSupplies: string
@@ -90,11 +91,12 @@ const ES: Strings = {
   sentBody: 'El inventario ya está en hello@anceu.com. Gracias.',
   progress: 'de',
   products: 'productos',
-  zoneCocina: 'Cocina',
-  zoneLimpieza: 'Limpieza',
-  zoneComida: 'Comida',
-  zoneBebidas: 'Bebidas',
+  zoneArmarioLimpieza: 'Armario limpieza',
+  zoneDespensa: 'Despensa',
   zoneCafeteria: 'Cafetería',
+  zoneArmarioDespensa: 'Armario despensa',
+  zoneCongelador: 'Congelador',
+  zoneCocina: 'Cocina',
   homeTitle: 'Tareas semanales',
   homeIntro: '¿Qué tarea vas a hacer?',
   taskSupplies: 'Suministros',
@@ -148,11 +150,12 @@ const EN: Strings = {
   sentBody: 'The inventory is now in hello@anceu.com. Thanks.',
   progress: 'of',
   products: 'products',
-  zoneCocina: 'Kitchen',
-  zoneLimpieza: 'Cleaning',
-  zoneComida: 'Food',
-  zoneBebidas: 'Drinks',
+  zoneArmarioLimpieza: 'Cleaning cupboard',
+  zoneDespensa: 'Pantry',
   zoneCafeteria: 'Coffee bar',
+  zoneArmarioDespensa: 'Pantry cupboard',
+  zoneCongelador: 'Freezer',
+  zoneCocina: 'Kitchen',
   homeTitle: 'Weekly tasks',
   homeIntro: 'Which task are you doing?',
   taskSupplies: 'Supplies',
