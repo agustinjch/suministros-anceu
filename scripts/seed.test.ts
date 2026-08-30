@@ -19,8 +19,8 @@ describe('seed.tsv', () => {
     expect(header).toEqual(['id', 'zone', 'target', 'unit', 'name', 'name_en'])
   })
 
-  it('tiene 49 productos', () => {
-    expect(data).toHaveLength(49)
+  it('tiene 50 productos', () => {
+    expect(data).toHaveLength(50)
   })
 
   it('no repite ids', () => {

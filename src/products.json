@@ -209,6 +209,17 @@
     "location": "despensa"
   },
   {
+    "id": 69042,
+    "name": "Bolsas de basura perfumadas 10 L",
+    "name_en": "Scented bin bags 10 L",
+    "froiz_name": "Bolsa Basura Selex Blanca Perfumada 10 l 40 unidades",
+    "froiz_url": "https://supermercado.froiz.com/product/69042-bolsa-basura-selex-blanca-perfumada-10-l-40-unidades",
+    "image": "/img/69042.jpg",
+    "target": 2,
+    "unit": "ud",
+    "location": "despensa"
+  },
+  {
     "id": 79223,
     "name": "Bayetas",
     "name_en": "Cleaning cloths",
@@ -341,23 +352,23 @@
     "location": "cafeteria"
   },
   {
-    "id": 23293,
+    "id": 21162,
     "name": "Papel de horno",
     "name_en": "Oven paper",
-    "froiz_name": "Papel Froiz hornos antiadherente 20 hojas",
-    "froiz_url": "https://supermercado.froiz.com/product/23293-papel-froiz-hornos-antiadherente-20-hojas",
-    "image": "/img/23293.jpg",
+    "froiz_name": "Papel Albal hornos 8 m",
+    "froiz_url": "https://supermercado.froiz.com/product/21162-papel-albal-hornos-8-m",
+    "image": "/img/21162.jpg",
     "target": 4,
     "unit": "ud",
     "location": "armario_despensa"
   },
   {
-    "id": 23646,
+    "id": 3694,
     "name": "Papel de aluminio",
     "name_en": "Aluminium foil",
-    "froiz_name": "Papel aluminio Froiz 30 m",
-    "froiz_url": "https://supermercado.froiz.com/product/23646-papel-aluminio-froiz-30-m",
-    "image": "/img/23646.jpg",
+    "froiz_name": "Papel aluminio Froiz reforzado 20 m",
+    "froiz_url": "https://supermercado.froiz.com/product/3694-papel-aluminio-froiz-reforzado-20-m",
+    "image": "/img/3694.jpg",
     "target": 4,
     "unit": "ud",
     "location": "armario_despensa"

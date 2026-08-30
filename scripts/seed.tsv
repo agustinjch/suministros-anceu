@@ -18,6 +18,7 @@ id	zone	target	unit	name	name_en
 38762	despensa	7	ud	Papel de cocina	Kitchen paper
 57172	despensa	3	ud	Bolsas de basura 100 L	Bin bags 100 L
 45113	despensa	3	ud	Bolsas de basura 30 L	Bin bags 30 L
+69042	despensa	2	ud	Bolsas de basura perfumadas 10 L	Scented bin bags 10 L
 79223	despensa	3	ud	Bayetas	Cleaning cloths
 27895	despensa	3	ud	Estropajos	Scouring pads
 21716	despensa	3	ud	Nanita	Cleaning pad (delicate surfaces)
@@ -30,8 +31,8 @@ id	zone	target	unit	name	name_en
 1924	cafeteria	2	ud	Menta poleo	Peppermint tea
 51190	cafeteria	12	ud	Bebida de avena	Oat drink
 15592	cafeteria	12	ud	Leche semidesnatada sin lactosa	Lactose-free semi-skimmed milk
-23293	armario_despensa	4	ud	Papel de horno	Oven paper
-23646	armario_despensa	4	ud	Papel de aluminio	Aluminium foil
+21162	armario_despensa	4	ud	Papel de horno	Oven paper
+3694	armario_despensa	4	ud	Papel de aluminio	Aluminium foil
 5406	armario_despensa	4	ud	Película de plástico	Cling film
 2527	armario_despensa	5	ud	Servilletas	Napkins
 7292	armario_despensa	5	pack	Shandy (pack de 6)	Shandy, lemon (6-pack)
